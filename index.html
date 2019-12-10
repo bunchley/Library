@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ashley's Library</title>
+  </head>
+  <body>
+    <div><h1>The Library</h1></div>
+    <div class="library-container">
+      <table class="library-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Read?</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody class="library-books" id="table-body"></tbody>
+      </table>
+
+    <button class="add-button">Add Book</button>
+    <div class="add-container" >
+      <form class ='add-form' style='display: none;'>
+        <div class='title input'>
+            <label for='title'>Title: </label>
+            <input type="text" data-name='title' placeholder='Enter Title'>
+        </div>
+        <div class='author input'>
+            <label for='author'>Author: </label>
+            <input type="text" data-name='author' placeholder="First Last">
+        </div>
+        <div class='page input'>
+            <label for='page'>Pages: </label>
+            <input type="text" data-name='page' placeholder='123'>
+
+        </div>
+        <div class='read input'>
+            <label for='read'>Have you read this book?</label>
+            <input type='checkbox' data-name='read' value='Yes'>Yes
+        </div>
+        <button class='addNewBook'>Add</button>
+      </form>
+    </div>
+    <script src="script/Library.js"></script>
+  </body>
+</html>
