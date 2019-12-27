@@ -5,7 +5,8 @@
     <title>Ashley's Library</title>
   </head>
   <body>
-    <div><h1>The Library</h1></div>
+    <div><h1>Bibliotech</h1></div>
+    <button class="add-button">Add Book</button>
     <div class="library-container">
       <table class="library-table">
         <thead>
@@ -20,7 +21,7 @@
         <tbody class="library-books" id="table-body"></tbody>
       </table>
 
-    <button class="add-button">Add Book</button>
+    
     <div class="add-container" >
       <form class ='add-form' style='display: none;'>
         <div class='title input'>
@@ -38,9 +39,13 @@
         </div>
         <div class='read input'>
             <label for='read'>Have you read this book?</label>
-            <input type='checkbox' data-name='read' value='Yes'>Yes
+            <input type='checkbox' data-name='read' value=true >Yes
         </div>
-        <button class='addNewBook'>Add</button>
+        <div class='form-buttons'>
+          <button class='addNewBook'>Add</button>
+          <button class='close'>Close</button>
+        </div>
+        
       </form>
     </div>
     <script src="script/Library.js"></script>
