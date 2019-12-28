@@ -6,6 +6,7 @@ const closeButton = document.querySelector(".close");
 const addBookButton = document.querySelector(".addNewBook");
 const form = document.querySelector(".add-form");
 const deleteBookButton = document.querySelectorAll(".delete");
+const libraryContainer = document.querySelector(".library-books");
 
 function Book(title, author, pages, haveRead) {
   this.title = title;
@@ -55,27 +56,31 @@ closeButton.addEventListener("click", function(e) {
 });
 
 //delete row button activation function
-deleteBookButton.forEach(item => {
-  item.addEventListener("click", e => {
+libraryContainer.addEventListener("click", e => {
     e.preventDefault();
-    e.target.closest();
-    console.log(e.target.closest());
+    console.log('target infor', e.target.getAttribute('data-num'));
+    let buttonArrayPosition = e.target.getAttribute('data-num');
+    myLibrary.splice(myLibrary.indexOf(buttonArrayPosition), 1)
+    console.log(myLibrary[buttonArrayPosition]);
+    render();
   });
-});
+
 
 //display Library
 function render() {
   let tableElement = "<tbody>";
-  for (let i = 0; i < myLibrary.length; i++) {
+  let i=0;
+  for (; i < myLibrary.length; i++) {
     tableElement += "<tr>";
     tableElement += "<td>" + myLibrary[i].title + "</td>";
     tableElement += "<td>" + myLibrary[i].author + "</td>";
     tableElement += "<td>" + myLibrary[i].pages + "</td>";
     tableElement += "<td>" + myLibrary[i].haveRead + "</td>";
-    tableElement += "<td>" + "<button class='delete'>Delete</button>" + "</td>";
+    tableElement += "<td>" + `<button class='delete' data-num=${i}>Delete</button>` + "</td>";
     tableElement += "</tr>";
+    
   }
   tableElement += "</tbody>";
-  document.querySelector(".library-books").innerHTML = tableElement;
+  libraryContainer.innerHTML = tableElement;
 }
 render();
