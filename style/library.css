@@ -1,0 +1,27 @@
+body {
+  /* background: url(../images/abandonedbookroom.jpg) grey no-repeat; */
+  background-size: cover;
+  align-content: center;
+  background-color: blanchedalmond;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 18;
+}
+
+.top-half {
+  position: absolute;
+  height: 15em;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  display: flexbox;
+  align-content: flex-start;
+}
+
+.table-half {
+  position: relative;
+}
