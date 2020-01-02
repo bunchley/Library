@@ -1,12 +1,11 @@
 "use strict";
-let myLibrary = [new Book("Crime and Punnishment", "Dostoevsky", "878", "Yes")];
+let myLibrary = [
+  new Book("Crime and Punnishment", "Dostoevsky", "878", "Want to Read")
+];
 
-const displayFormButton = document.querySelector(".add-button");
-const closeButton = document.querySelector(".close");
-const addBookButton = document.querySelector(".addNewBook");
 const form = document.querySelector(".add-form");
-const deleteBookButton = document.querySelectorAll(".delete");
 const libraryContainer = document.querySelector(".library-books");
+const newBookFormContainer = document.querySelector(".top-half");
 
 function Book(title, author, pages, haveRead) {
   this.title = title;
@@ -15,17 +14,17 @@ function Book(title, author, pages, haveRead) {
   this.haveRead = haveRead;
 }
 
+Book.prototype.changeReadStatus = function(newStatus) {
+  this.read = newStatus;
+};
+
 //adding user input to library
 function addBookToLibrary() {
   let title = document.querySelector("[data-name=title]").value;
   let author = document.querySelector("[data-name=author]").value;
   let pages = document.querySelector("[data-name=page]").value;
   let haveRead = document.querySelector("[data-name=read]").checked;
-  if (
-    haveRead === true
-      ? (haveRead = "Already read")
-      : (haveRead = "Want to Read")
-  )
+  if (haveRead === true ? (haveRead = "Already read") : (haveRead = "Read"))
     if ((title === "") | (author === "") | (pages === "")) {
       //provide an error
       console.log(
@@ -40,37 +39,58 @@ function addBookToLibrary() {
       myLibrary.push(newBook);
     }
 }
-//display the add book to library form
-displayFormButton.addEventListener("click", function(e) {
+function toggleReadBook(id) {
+  console.log("in the read toggler");
+  myLibrary[id].read === true ? false : true;
+}
+
+newBookFormContainer.addEventListener("click", e => {
+  //prevents a reload
   e.preventDefault();
-  form.style.display = "block";
-  //displayFormButton.style.display = "none";
-});
-//trigger adding book to array
-addBookButton.addEventListener("click", function(e) {
-  e.preventDefault();
-  addBookToLibrary();
-  render();
+  //display the add book to library form
+  if (e.target.classList.contains("add-button")) {
+    console.log("add button selected");
+
+    form.style.display = "block";
+  }
+  //trigger adding book to array
+  else if (e.target.classList.contains("addNewBook")) {
+    console.log("add book button clicked");
+    addBookToLibrary();
+    render();
+  }
+  //close add new book form
+  else if (e.target.classList.contains("close")) {
+    console.log("close button selected");
+    form.style.display = "none";
+  }
 });
 
-//closes form
-closeButton.addEventListener("click", function(e) {
-  e.preventDefault();
-  form.style.display = "none";
-});
-
-//delete row button activation function
+//delete and read status handler for library
 libraryContainer.addEventListener("click", e => {
+  //prevents a reload
+  e.preventDefault();
+
+  //delete button lsitener
   if (e.target.classList.contains("delete")) {
-    e.preventDefault();
     console.log("target infor", e.target.getAttribute("data-num"));
     let buttonArrayPosition = e.target.getAttribute("data-num");
     myLibrary.splice(myLibrary.indexOf(buttonArrayPosition), 1);
     console.log(myLibrary[buttonArrayPosition]);
     render();
-  } else if (e.target.classList.contains("read-status")) {
+  }
+  //read status toggler
+  else if (e.target.classList.contains("read-status")) {
     let buttonArrayPosition = e.target.getAttribute("data-num");
-    //myLibrary[buttonArrayPosition].haveRead   <______________________where you left off.
+    console.log("read status clicked");
+    if (e.target.innerText === "Want to Read") {
+      myLibrary[buttonArrayPosition].changeReadStatus("Read");
+    } else {
+      myLibrary[buttonArrayPosition].changeReadStatus("Want to Read");
+    }
+    e.target.innerText = myLibrary[buttonArrayPosition].read;
+    // toggleReadBook(buttonArrayPosition); //<______________________where you left off.
+    // render();
   }
 });
 
